@@ -27,13 +27,19 @@ class ScriptLoader {
 			true
 		);
 
-		wp_localize_script(
-			'foldspy-tracker',
-			'FoldSpyData',
-			[
-				'nonce' => wp_create_nonce( 'wp_rest' ),
-				'endpoint' => esc_url_raw( rest_url( 'foldspy/v1/log' ) ),
-			]
-		);
+        $script_data = [
+			'nonce' => wp_create_nonce( 'wp_rest' ),
+            'endpoint' => apply_filters(
+                'foldspy/tracker/rest_endpoint',
+                esc_url_raw( rest_url( 'foldspy/v1/log' ) )
+            ),
+        ];
+
+        //Used instead of wp_localize_script to avoid creating a global variable
+        wp_add_inline_script(
+            'foldspy-tracker',
+            'const FoldSpyData = ' . wp_json_encode( $script_data ) . ';',
+            'before'
+        );
 	}
 }
