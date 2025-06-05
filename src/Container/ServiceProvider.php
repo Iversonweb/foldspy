@@ -4,26 +4,18 @@ namespace FoldSpy\Container;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use FoldSpy\Container\TrackerServiceProvider;
+use FoldSpy\Container\SupportServiceProvider;
 
 class ServiceProvider extends AbstractServiceProvider {
 	/**
-	 * List of service IDs to be booted automatically.
+	 * Array of service IDs to be booted automatically.
+	 * 
+	 * @var array
 	 */
-	protected function getBootables(): array {
-		return [
-			'FoldSpy\\Tracker\\ScriptLoader',
-		];
-	}
-
-	/**
-	 * List of all modular service providers to register.
-	 */
-	protected function getProviders(): array {
-		return [
-			TrackerServiceProvider::class,
-		];
-	}
-
+	protected $provides = [
+		'FoldSpy\\Tracker\\ScriptLoader',
+		'FoldSpy\\Tracker\\RestEndpoint',
+	];
 	
 	/**
 	 * Checks if the service provider provides a service with the given ID.
@@ -35,6 +27,15 @@ class ServiceProvider extends AbstractServiceProvider {
 		return $id === 'bootable';
 	}
 
+	/**
+	 * List of all modular service providers to register.
+	 */
+	protected function getProviders(): array {
+		return [
+			TrackerServiceProvider::class,
+			SupportServiceProvider::class,
+		];
+	}
 	
 	/**
 	 * Registers the service providers and bootable services with the container.
@@ -56,7 +57,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		$container->add( 'bootable', function () use ( $container ) {
 			return array_map(
 				fn( $id ) => $container->get( $id ),
-				$this->getBootables()
+				$this->provides
 			);
 		});
 	}
