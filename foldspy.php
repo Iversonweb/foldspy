@@ -8,15 +8,15 @@
  * @license     GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name: TO FILL
- * Version:     TO FILL
- * Description: TO FILL
- * Author:      Mathieu Lamiot
+ * Plugin Name: FoldSpy
+ * Version:     Tracks above-the-fold hyperlinks seen on homepage visits.
+ * Description: 1.0.0
+ * Author:      Tobi Babatunde
  */
 
-namespace ROCKET_WP_CRAWLER;
+namespace FoldSpy;
 
-define( 'ROCKET_CRWL_PLUGIN_FILENAME', __FILE__ ); // Filename of the plugin, including the file.
+define( 'FOLDSPY_PLUGIN_FILENAME', __FILE__ ); // Filename of the plugin, including the file.
 
 if ( ! defined( 'ABSPATH' ) ) { // If WordPress is not loaded.
 	exit( 'WordPress not loaded. Can not load the plugin' );
@@ -33,10 +33,11 @@ require_once __DIR__ . '/src/support/exceptions.php';
  *
  * @return void
  */
-function wpc_crawler_plugin_init() {
-	$wpc_crawler_plugin = new Rocket_Wpc_Plugin_Class();
+function foldspy_plugin_init() {
+	FoldSpy_Plugin_Class::get_instance();
 }
-add_action( 'plugins_loaded', __NAMESPACE__ . '\wpc_crawler_plugin_init' );
 
-register_activation_hook( __FILE__, __NAMESPACE__ . '\Rocket_Wpc_Plugin_Class::wpc_activate' );
-register_uninstall_hook( __FILE__, __NAMESPACE__ . '\Rocket_Wpc_Plugin_Class::wpc_uninstall' );
+add_action( 'plugins_loaded', __NAMESPACE__ . '\foldspy_plugin_init' );
+
+register_activation_hook( __FILE__, __NAMESPACE__ . '\FoldSpy_Plugin_Class::wpc_activate' );
+register_uninstall_hook( __FILE__, __NAMESPACE__ . '\FoldSpy_Plugin_Class::wpc_uninstall' );

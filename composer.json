@@ -12,7 +12,8 @@
         }
     ],
     "require"       : {
-        "php" : ">=7.3"
+        "php": ">=7.3",
+        "league/container": "5.x-dev"
     },
     "require-dev":{
         "raveren/kint": "~1.0",
@@ -25,7 +26,11 @@
 		"wp-coding-standards/wpcs": "dev-develop",
 		"wp-media/phpunit": "^3"
     },
-    "autoload": {},
+    "autoload": {
+        "psr-4": {
+            "FoldSpy\\": "src/"
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
