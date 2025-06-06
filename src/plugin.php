@@ -11,6 +11,7 @@
 namespace FoldSpy;
 use League\Container\Container as LeagueContainer;
 use FoldSpy\Container\ServiceProvider;
+use FoldSpy\Tracker\LogSchema;
 
 /**
  * Main plugin class. It manages initialization, install, and activations.
@@ -76,6 +77,9 @@ class FoldSpy_Plugin_Class {
 		}
 		$plugin = isset( $_REQUEST['plugin'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['plugin'] ) ) : '';
 		check_admin_referer( "activate-plugin_{$plugin}" );
+
+		// Creates the database schema for logging data.
+		LogSchema::create();
 	}
 
 	/**
@@ -103,5 +107,8 @@ class FoldSpy_Plugin_Class {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
 		}
+
+		// Drops the database schema for logging data.
+		LogSchema::drop();
 	}
 }
