@@ -15,6 +15,7 @@ class ServiceProvider extends AbstractServiceProvider {
 	protected $provides = [
 		'FoldSpy\\Tracker\\ScriptLoader',
 		'FoldSpy\\Tracker\\RestEndpoint',
+		'FoldSpy\\Tracker\\LogCleanup',
 	];
 	
 	/**

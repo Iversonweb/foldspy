@@ -110,5 +110,8 @@ class FoldSpy_Plugin_Class {
 
 		// Drops the database schema for logging data.
 		LogSchema::drop();
+
+		// Clears the scheduled hook for log cleanup to prevent duplicate tasks.
+		wp_clear_scheduled_hook('foldspy/tracker/cleanup_logs');
 	}
 }
