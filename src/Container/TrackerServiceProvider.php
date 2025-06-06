@@ -5,6 +5,8 @@ namespace FoldSpy\Container;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use FoldSpy\Tracker\ScriptLoader;
 use \FoldSpy\Tracker\RestEndpoint;
+use \FoldSpy\Tracker\LogSchema;
+use \FoldSpy\Tracker\Storage;
 
 class TrackerServiceProvider extends AbstractServiceProvider {
 	/**
@@ -15,6 +17,8 @@ class TrackerServiceProvider extends AbstractServiceProvider {
 	protected $provides =  [
 		'FoldSpy\\Tracker\\ScriptLoader' => ScriptLoader::class,
 		'FoldSpy\\Tracker\\RestEndpoint' => RestEndpoint::class,
+		'FoldSpy\\Tracker\\SchemaManager' => LogSchema::class,
+		'FoldSpy\\Tracker\\Storage' => Storage::class,
 	];
 
 	/**
@@ -24,6 +28,7 @@ class TrackerServiceProvider extends AbstractServiceProvider {
 	 */
 	protected $arguments = [
         'FoldSpy\\Tracker\\RestEndpoint' => [
+            'FoldSpy\\Tracker\\Storage',
             'FoldSpy\\Support\\Logger',
         ],
     ];
