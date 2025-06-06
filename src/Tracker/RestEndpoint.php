@@ -49,9 +49,25 @@ class RestEndpoint {
 		register_rest_route( 'foldspy/v1', '/log', [
 			'methods'  => WP_REST_Server::CREATABLE,
 			'callback' => [ $this, 'handle_request' ],
-			'permission_callback' => '__return_true',
+			'permission_callback' => [$this, 'can_access'],
 		] );
 	}
+
+    /**
+     * Checks if the current user has access to the REST endpoint.
+     * 
+     * This method verifies the nonce and checks if the current user has the 'read' capability.
+     * 
+     * @return bool True if access is allowed, false otherwise.
+     */
+    public function can_access(): bool {
+        $nonce = $_SERVER['HTTP_X_WP_NONCE'] ?? '';
+    
+        $allowed = wp_verify_nonce($nonce, 'wp_rest')
+            && current_user_can('read');
+    
+        return apply_filters('foldspy/allow_rest', $allowed);
+    }
 
 	/**
 	 * Handles the incoming request, validates the data, and logs it.
