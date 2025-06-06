@@ -3,38 +3,32 @@
 namespace FoldSpy\Container;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use FoldSpy\Tracker\ScriptLoader;
-use \FoldSpy\Tracker\RestEndpoint;
-use \FoldSpy\Tracker\LogSchema;
-use \FoldSpy\Tracker\Storage;
-use FoldSpy\Tracker\LogCleanup;
+use FoldSpy\Admin\AdminPage;
+use FoldSpy\Admin\AdminRenderer;
 
-class TrackerServiceProvider extends AbstractServiceProvider {
+class AdminServiceProvider extends AbstractServiceProvider {
 	/**
 	 * Array of services provided by this service provider.
 	 * 
 	 * @var array An array of services where the key is the service ID and the value is the class name.
 	 */
-	protected $provides =  [
-		'FoldSpy\\Tracker\\ScriptLoader' => ScriptLoader::class,
-		'FoldSpy\\Tracker\\RestEndpoint' => RestEndpoint::class,
-		'FoldSpy\\Tracker\\LogSchema' => LogSchema::class,
-		'FoldSpy\\Tracker\\Storage' => Storage::class,
-		'FoldSpy\\Tracker\\LogCleanup' => LogCleanup::class,
+	protected array $provides = [
+		'FoldSpy\\Admin\\AdminPage' => AdminPage::class,
+        'FoldSpy\\Admin\\AdminRenderer' => AdminRenderer::class,
 	];
 
-	/**
+    /**
 	 * Array of arguments to be passed to services during instantiation.
 	 * 
 	 * @var array An array of arguments where the key is the service ID and the value is an array of argument class names.
 	 */
 	protected $arguments = [
-        'FoldSpy\\Tracker\\RestEndpoint' => [
+        'FoldSpy\\Admin\\AdminPage' => [
             'FoldSpy\\Tracker\\Storage',
-            'FoldSpy\\Support\\Logger',
+            'FoldSpy\\Admin\\AdminRenderer',
         ],
-        'FoldSpy\\Tracker\\LogCleanup' => [
-            'FoldSpy\\Support\\Logger',
+        'FoldSpy\\Admin\\AdminRenderer' => [
+            'FoldSpy\\Tracker\\Storage',
         ],
     ];
 

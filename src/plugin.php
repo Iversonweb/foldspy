@@ -79,7 +79,8 @@ class FoldSpy_Plugin_Class {
 		check_admin_referer( "activate-plugin_{$plugin}" );
 
 		// Creates the database schema for logging data.
-		LogSchema::create();
+		$container = FoldSpy_Plugin_Class::get_instance()->get_container();
+		$container->get(LogSchema::class)->create();
 	}
 
 	/**
@@ -109,7 +110,8 @@ class FoldSpy_Plugin_Class {
 		}
 
 		// Drops the database schema for logging data.
-		LogSchema::drop();
+		$container = FoldSpy_Plugin_Class::get_instance()->get_container();
+		$container->get(LogSchema::class)->drop();
 
 		// Clears the scheduled hook for log cleanup to prevent duplicate tasks.
 		wp_clear_scheduled_hook('foldspy/tracker/cleanup_logs');
