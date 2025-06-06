@@ -7,6 +7,7 @@ use FoldSpy\Tracker\ScriptLoader;
 use \FoldSpy\Tracker\RestEndpoint;
 use \FoldSpy\Tracker\LogSchema;
 use \FoldSpy\Tracker\Storage;
+use FoldSpy\Tracker\LogCleanup;
 
 class TrackerServiceProvider extends AbstractServiceProvider {
 	/**
@@ -19,6 +20,8 @@ class TrackerServiceProvider extends AbstractServiceProvider {
 		'FoldSpy\\Tracker\\RestEndpoint' => RestEndpoint::class,
 		'FoldSpy\\Tracker\\SchemaManager' => LogSchema::class,
 		'FoldSpy\\Tracker\\Storage' => Storage::class,
+		'FoldSpy\\Tracker\\LogCleanup' => LogCleanup::class,
+		
 	];
 
 	/**
@@ -29,6 +32,9 @@ class TrackerServiceProvider extends AbstractServiceProvider {
 	protected $arguments = [
         'FoldSpy\\Tracker\\RestEndpoint' => [
             'FoldSpy\\Tracker\\Storage',
+            'FoldSpy\\Support\\Logger',
+        ],
+        'FoldSpy\\Tracker\\LogCleanup' => [
             'FoldSpy\\Support\\Logger',
         ],
     ];
