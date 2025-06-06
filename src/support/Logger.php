@@ -18,6 +18,11 @@ class Logger {
 	 */
 	const MAX_LOG_FILES = 5;
 
+	/**
+	 * The path to the current log file.
+	 * 
+	 * @var string
+	 */
 	private string $log_file;
 
 	/**

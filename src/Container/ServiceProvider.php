@@ -5,6 +5,7 @@ namespace FoldSpy\Container;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use FoldSpy\Container\TrackerServiceProvider;
 use FoldSpy\Container\SupportServiceProvider;
+use FoldSpy\Container\AdminServiceProvider;
 
 class ServiceProvider extends AbstractServiceProvider {
 	/**
@@ -16,6 +17,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		'FoldSpy\\Tracker\\ScriptLoader',
 		'FoldSpy\\Tracker\\RestEndpoint',
 		'FoldSpy\\Tracker\\LogCleanup',
+		'FoldSpy\\Admin\\AdminPage',
 	];
 	
 	/**
@@ -35,6 +37,7 @@ class ServiceProvider extends AbstractServiceProvider {
 		return [
 			TrackerServiceProvider::class,
 			SupportServiceProvider::class,
+			AdminServiceProvider::class,
 		];
 	}
 	
