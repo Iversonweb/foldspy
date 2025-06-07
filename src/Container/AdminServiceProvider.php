@@ -1,40 +1,40 @@
 <?php
 
-namespace FoldSpy\Container;
+namespace Fold_Spy\Container;
 
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use FoldSpy\Admin\AdminPage;
-use FoldSpy\Admin\AdminRenderer;
+use Fold_Spy\Admin\AdminPage;
+use Fold_Spy\Admin\AdminRenderer;
 
 class AdminServiceProvider extends AbstractServiceProvider {
 	/**
 	 * Array of services provided by this service provider.
-	 * 
+	 *
 	 * @var array An array of services where the key is the service ID and the value is the class name.
 	 */
-	protected array $provides = [
-		'FoldSpy\\Admin\\AdminPage' => AdminPage::class,
-        'FoldSpy\\Admin\\AdminRenderer' => AdminRenderer::class,
-	];
+	protected array $provides = array(
+		'Fold_Spy\\Admin\\AdminPage'     => AdminPage::class,
+		'Fold_Spy\\Admin\\AdminRenderer' => AdminRenderer::class,
+	);
 
-    /**
+	/**
 	 * Array of arguments to be passed to services during instantiation.
-	 * 
+	 *
 	 * @var array An array of arguments where the key is the service ID and the value is an array of argument class names.
 	 */
-	protected $arguments = [
-        'FoldSpy\\Admin\\AdminPage' => [
-            'FoldSpy\\Tracker\\Storage',
-            'FoldSpy\\Admin\\AdminRenderer',
-        ],
-        'FoldSpy\\Admin\\AdminRenderer' => [
-            'FoldSpy\\Tracker\\Storage',
-        ],
-    ];
+	protected $arguments = array(
+		'Fold_Spy\\Admin\\AdminPage'     => array(
+			'Fold_Spy\\Tracker\\Storage',
+			'Fold_Spy\\Admin\\AdminRenderer',
+		),
+		'Fold_Spy\\Admin\\AdminRenderer' => array(
+			'Fold_Spy\\Tracker\\Storage',
+		),
+	);
 
 	/**
 	 * Checks if the service provider provides a service with the given ID.
-	 * 
+	 *
 	 * @param string $id The ID of the service to check.
 	 * @return bool Returns true if the service provider provides the service, false otherwise.
 	 */
@@ -44,22 +44,22 @@ class AdminServiceProvider extends AbstractServiceProvider {
 
 	/**
 	 * Registers the services provided by this service provider with the container.
-	 * 
+	 *
 	 * This method iterates over the list of services and adds them to the container, setting them as shared.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function register(): void {
 		foreach ( $this->provides as $id => $class ) {
-            $container = $this->getContainer()
-                ->add( $id, $class )
-                ->setShared( true );
+			$container = $this->getContainer()
+				->add( $id, $class )
+				->setShared( true );
 
-            if ( isset( $this->arguments[ $id ] ) ) {
-                foreach ( $this->arguments[ $id ] as $arg ) {
-                    $container->addArgument( $arg );
-                }
-            }
-        }
+			if ( isset( $this->arguments[ $id ] ) ) {
+				foreach ( $this->arguments[ $id ] as $arg ) {
+					$container->addArgument( $arg );
+				}
+			}
+		}
 	}
 }

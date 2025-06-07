@@ -3,8 +3,10 @@ name: PHP CodeSniffer lint
 on:
   pull_request:
     branches:
-      - master
+      - trunk
       - develop
+      - branch-*
+      - feat/*
 jobs:
   run:
     runs-on: ${{ matrix.operating-system }}
@@ -13,9 +15,9 @@ jobs:
       fail-fast: false
       matrix:
         operating-system: [ubuntu-latest]
-        php-versions: ['7.4']
+        php-versions: ['8.2']
 
-    name: Lint with PHPCS. PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }}.
+    name: Fold Spy with PHPCS. PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }}.
     steps:
     - name: Checkout
       uses: actions/checkout@v3

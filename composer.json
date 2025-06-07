@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "FoldSpy\\": "src/"
+            "Fold_Spy\\": "src/"
         }
     },
     "extra": {
