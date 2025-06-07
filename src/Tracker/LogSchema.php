@@ -30,12 +30,15 @@ class LogSchema {
 
 	/**
 	 * Creates the table for storing logs if it doesn't already exist.
+	 *
+	 * @param ?callable $db_delta_fn Optional function to handle database delta operations.
 	 */
-	public function create() {
-		// Include the upgrade script to use dbDelta function.
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+	public function create( ?callable $db_delta_fn = null ): void {
+		if ( ! $db_delta_fn ) {
+			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+			$db_delta_fn = 'dbDelta';
+		}
 
-		$table           = $wpdb->prefix . 'foldspy_logs';
 		$charset_collate = $this->db->get_charset_collate();
 
 		$sql = "CREATE TABLE {$this->table} (
@@ -49,7 +52,7 @@ class LogSchema {
 			PRIMARY KEY  (id)
 		) $charset_collate;";
 
-		dbDelta( $sql );
+		$db_delta_fn( $sql );
 	}
 
 	/**

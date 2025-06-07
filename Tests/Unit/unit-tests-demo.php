@@ -17,12 +17,11 @@ use WPMedia\PHPUnit\Unit\TestCase;
  */
 class Rocket_Wpc_Demo_Test extends TestCase {
 
-    /**
-     * Always pass.
-     */
-    public function testAlwaysPass() {
+	/**
+	 * Always pass.
+	 */
+	public function testAlwaysPass() {
 
-		$this->assertTrue(true);
-
-    }
+		$this->assertTrue( true );
+	}
 }

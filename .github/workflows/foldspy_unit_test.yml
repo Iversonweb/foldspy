@@ -3,8 +3,10 @@ name: Unit/Integration tests PHP
 on:
   pull_request:
     branches:
-      - master
+      - trunk
       - develop
+      - branch-*
+      - feat/*
 jobs:
   run:
     runs-on: ${{ matrix.operating-system }}

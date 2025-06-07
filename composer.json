@@ -16,20 +16,26 @@
         "league/container": "5.x-dev"
     },
     "require-dev":{
-        "raveren/kint": "~1.0",
+        "php": "^7.3 || ^8",
+        "brain/monkey": "^2.0@dev",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1",
         "filp/whoops": "~2.0",
-		"php": "^7.3 || ^8",
-		"brain/monkey": "^2.0",
-		"dealerdirect/phpcodesniffer-composer-installer": "^1",
-		"phpcompatibility/phpcompatibility-wp": "^2.0",
-		"phpunit/phpunit": "^5.7 || ^7 || ^8",
-		"wp-coding-standards/wpcs": "dev-develop",
-		"wp-media/phpunit": "^3"
+        "php-mock/php-mock-phpunit": "dev-master",
+        "phpcompatibility/phpcompatibility-wp": "^2.0",
+        "phpunit/phpunit": "^5.7 || ^7 || ^8",
+        "raveren/kint": "~1.0",
+        "wp-coding-standards/wpcs": "dev-develop",
+        "wp-media/phpunit": "^3"
     },
     "autoload": {
         "psr-4": {
             "Fold_Spy\\": "src/"
         }
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "Tests\\": "Tests/"
+      }
     },
     "extra": {
         "branch-alias": {
