@@ -8,15 +8,15 @@
  * @license     GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name: FoldSpy
+ * Plugin Name: Fold Spy
  * Version:     Tracks above-the-fold hyperlinks seen on homepage visits.
  * Description: 1.0.0
  * Author:      Tobi Babatunde
  */
 
-namespace FoldSpy;
+namespace Fold_Spy;
 
-define( 'FOLDSPY_PLUGIN_FILENAME', __FILE__ ); // Filename of the plugin, including the file.
+define( 'FOLD_SPY_PLUGIN_FILENAME', __FILE__ ); // Filename of the plugin, including the file.
 
 if ( ! defined( 'ABSPATH' ) ) { // If WordPress is not loaded.
 	exit( 'WordPress not loaded. Can not load the plugin' );

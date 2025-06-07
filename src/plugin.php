@@ -8,24 +8,29 @@
  * @license     GPL-2.0-or-later
  */
 
-namespace FoldSpy;
+namespace Fold_Spy;
+
 use League\Container\Container as LeagueContainer;
-use FoldSpy\Container\ServiceProvider;
-use FoldSpy\Tracker\LogSchema;
+use Fold_Spy\Container\ServiceProvider;
+use Fold_Spy\Tracker\LogSchema;
 
 /**
  * Main plugin class. It manages initialization, install, and activations.
  */
 class FoldSpy_Plugin_Class {
 	/**
-     * The singleton instance of this container.
-     */
-    private static ?self $instance = null;
+	 * The singleton instance of this container.
+	 *
+	 * @var self|null
+	 */
+	private static ?self $instance = null;
 
-     /**
-     * The underlying League\Container instance.
-     */
-    private LeagueContainer $container;
+	/**
+	 * The underlying League\Container instance.
+	 *
+	 * @var LeagueContainer
+	 */
+	private LeagueContainer $container;
 
 	/**
 	 * Manages plugin initialization
@@ -37,9 +42,9 @@ class FoldSpy_Plugin_Class {
 		$this->container->addServiceProvider( new ServiceProvider() );
 
 		// Register plugin lifecycle hooks.
-		register_deactivation_hook( FOLDSPY_PLUGIN_FILENAME, array( $this, 'wpc_deactivate' ) );
+		register_deactivation_hook( FOLD_SPY_PLUGIN_FILENAME, array( $this, 'wpc_deactivate' ) );
 
-		// Boot all tagged services
+		// Boot all tagged services.
 		foreach ( $this->container->get( 'bootable' ) as $service ) {
 			if ( method_exists( $service, 'boot' ) ) {
 				$service->boot();
@@ -48,22 +53,22 @@ class FoldSpy_Plugin_Class {
 	}
 
 	/**
-     * Retrieve the singleton instance of the container.
-     */
-    public static function get_instance(): self {
-        if ( self::$instance === null ) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	 * Retrieve the singleton instance of the container.
+	 */
+	public static function get_instance(): self {
+		if ( null === self::$instance ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
 	/**
-     * Return the underlying League\Container instance.
-     * Useful if you need to resolve or register other services directly.
-     */
-    public function get_container(): LeagueContainer {
-        return $this->container;
-    }
+	 * Return the underlying League\Container instance.
+	 * Useful if you need to resolve or register other services directly.
+	 */
+	public function get_container(): LeagueContainer {
+		return $this->container;
+	}
 
 	/**
 	 * Handles plugin activation:
@@ -79,8 +84,8 @@ class FoldSpy_Plugin_Class {
 		check_admin_referer( "activate-plugin_{$plugin}" );
 
 		// Creates the database schema for logging data.
-		$container = FoldSpy_Plugin_Class::get_instance()->get_container();
-		$container->get(LogSchema::class)->create();
+		$container = self::get_instance()->get_container();
+		$container->get( LogSchema::class )->create();
 	}
 
 	/**
@@ -110,10 +115,10 @@ class FoldSpy_Plugin_Class {
 		}
 
 		// Drops the database schema for logging data.
-		$container = FoldSpy_Plugin_Class::get_instance()->get_container();
-		$container->get(LogSchema::class)->drop();
+		$container = self::get_instance()->get_container();
+		$container->get( LogSchema::class )->drop();
 
 		// Clears the scheduled hook for log cleanup to prevent duplicate tasks.
-		wp_clear_scheduled_hook('foldspy/tracker/cleanup_logs');
+		wp_clear_scheduled_hook( 'foldspy/tracker/cleanup_logs' );
 	}
 }

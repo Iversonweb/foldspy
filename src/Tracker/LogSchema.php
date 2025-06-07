@@ -1,20 +1,20 @@
 <?php
 
-namespace FoldSpy\Tracker;
+namespace Fold_Spy\Tracker;
 
 use wpdb;
 
 class LogSchema {
 	/**
 	 * The WordPress database object.
-	 * 
+	 *
 	 * @var wpdb
 	 */
 	private wpdb $db;
 
 	/**
 	 * The name of the table used for storing logs.
-	 * 
+	 *
 	 * @var string
 	 */
 	private string $table;
@@ -24,7 +24,7 @@ class LogSchema {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->db = $wpdb;
+		$this->db    = $wpdb;
 		$this->table = $this->db->prefix . 'foldspy_logs';
 	}
 
@@ -32,10 +32,10 @@ class LogSchema {
 	 * Creates the table for storing logs if it doesn't already exist.
 	 */
 	public function create() {
-		// Include the upgrade script to use dbDelta function
+		// Include the upgrade script to use dbDelta function.
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
-		$table = $wpdb->prefix . 'foldspy_logs';
+		$table           = $wpdb->prefix . 'foldspy_logs';
 		$charset_collate = $this->db->get_charset_collate();
 
 		$sql = "CREATE TABLE {$this->table} (
@@ -56,6 +56,6 @@ class LogSchema {
 	 * Drops the table for storing logs if it exists.
 	 */
 	public function drop(): void {
-		$this->db->query("DROP TABLE IF EXISTS {$this->table}");
+		$this->db->query( "DROP TABLE IF EXISTS {$this->table}" );
 	}
 }
