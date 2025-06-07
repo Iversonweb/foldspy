@@ -1,14 +1,14 @@
 {
     "name"          : "wp-media/package-template",
-    "description"   : "WP Plugin template for WP Media.",
+    "description"   : "Tracks above-the-fold hyperlinks seen on homepage visits.",
     "type"          : "project",
     "keywords"      : ["wordpress", "wp", "plugin"],
-    "homepage"      : "https://github.com/wp-media/package-template",
+    "homepage"      : "https://github.com/Iversonweb/foldspy/",
     "license"       : "GPL-2.0+",
     "authors"       : [
         {
-            "name": "Mathieu Lamiot",
-            "email": "mathieu@wp-media.me"
+            "name": "Tobi Babatunde",
+            "email": "iversonweb98@gmail.com"
         }
     ],
     "require"       : {
