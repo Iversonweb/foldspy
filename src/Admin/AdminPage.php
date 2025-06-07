@@ -73,7 +73,6 @@ class AdminPage {
 				$this->deny_access();
 			}
 
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$this->render_single_log( (int) $this->get_query_arg( 'view_log' ) );
 			return;
 		}
