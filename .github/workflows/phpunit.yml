@@ -30,8 +30,5 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction --optimize-autoloader
 
-      - name: Dump autoload
-        run: composer dump-autoload
-
       - name: Run PHPUnit tests
-        run: vendor/bin/phpunit --colors=always --stop-on-failure
+        run: composer test-unit
