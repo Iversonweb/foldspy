@@ -27,4 +27,4 @@ jobs:
       - name: Install dependencies
         run: composer install --no-dev --prefer-dist
       - name: Run PHPUnit tests
-        run: composer test-unit
+        run: vendor/bin/phpunit --colors=always --stop-on-failure
