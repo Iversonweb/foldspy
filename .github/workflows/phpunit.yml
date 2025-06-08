@@ -30,10 +30,8 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction --optimize-autoloader
 
-      - name: Debug Logger class
-        run: |
-          find src/support -name Logger.php
-          grep -q 'function log' src/Support/Logger.php && echo "log() found" || echo "log() NOT found"
+      - name: Dump autoload
+        run: composer dump-autoload
 
       - name: Run PHPUnit tests
-        run: composer test-unit
+        run: vendor/bin/phpunit --colors=always --stop-on-failure
