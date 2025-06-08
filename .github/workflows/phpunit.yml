@@ -11,12 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, bcmath, intl, gd, exif, iconv, imagick, json
           coverage: none
+
       - name: Cache Composer dependencies
         uses: actions/cache@v3
         with:
@@ -24,7 +26,9 @@ jobs:
           key: ${{ runner.os }}-php-${{ hashFiles('composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-php-
+
       - name: Install dependencies
-        run: composer install --no-dev --prefer-dist
+        run: composer install --prefer-dist --no-interaction --optimize-autoloader
+
       - name: Run PHPUnit tests
-        run: vendor/bin/phpunit --colors=always --stop-on-failure
+        run: composer test-unit
