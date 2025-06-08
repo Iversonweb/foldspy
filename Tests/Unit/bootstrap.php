@@ -4,11 +4,17 @@ namespace WPMedia\PHPUnit;
 
 use function WPMedia\PHPUnit\init_test_suite;
 
-require_once dirname(dirname(__DIR__)).'/vendor/wp-media/phpunit/BootstrapManager.php';
+require_once dirname( dirname( __DIR__ ) ) . '/vendor/autoload.php';
+
+// Initialize Brain Monkey early.
+\Brain\Monkey\setUp();
+
+require_once dirname( dirname( __DIR__ ) ) . '/vendor/wp-media/phpunit/BootstrapManager.php';
 BootstrapManager::setupConstants( $_SERVER['argv'][1] );
 
+
 require_once WPMEDIA_PHPUNIT_ROOT_DIR . '/vendor/yoast/wp-test-utils/src/BrainMonkey/bootstrap.php';
-require_once dirname(dirname(__DIR__)).'/vendor/wp-media/phpunit/bootstrap-functions.php';
+require_once dirname( dirname( __DIR__ ) ) . '/vendor/wp-media/phpunit/bootstrap-functions.php';
 init_test_suite();
 
 // Bootstrap the wp-media/phpunit-{add-on}.
@@ -23,4 +29,11 @@ if (
 // Bootstrap the plugin.
 if ( is_readable( WPMEDIA_PHPUNIT_ROOT_TEST_DIR . '/bootstrap.php' ) ) {
 	require_once WPMEDIA_PHPUNIT_ROOT_TEST_DIR . '/bootstrap.php';
+}
+
+
+if ( ! function_exists( 'trailingslashit' ) ) {
+	function trailingslashit( $string ) {
+		return rtrim( $string, '/\\' ) . '/';
+	}
 }

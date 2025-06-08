@@ -3,8 +3,10 @@ name: Unit/Integration tests PHP
 on:
   pull_request:
     branches:
-      - master
+      - trunk
       - develop
+      - branch-*
+      - feat/*
 jobs:
   run:
     runs-on: ${{ matrix.operating-system }}
@@ -44,7 +46,7 @@ jobs:
       run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
     - name: Cache dependencies
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ${{ steps.composercache.outputs.dir }}
         key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
