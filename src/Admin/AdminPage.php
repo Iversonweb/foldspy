@@ -90,7 +90,7 @@ class AdminPage {
 
 		// Handle pagination.
 		$page        = max( 1, (int) $this->get_query_arg( 'paged', 1 ) );
-		$per_page    = apply_filters( 'foldspy_admin_per_page', 10 );
+		$per_page    = apply_filters( 'foldspy_admin_per_page', 4 );
 		$logs        = $this->storage->get_visits( $page, $per_page );
 		$total       = $this->storage->get_total_rows();
 		$total_pages = (int) ceil( $total / $per_page );
