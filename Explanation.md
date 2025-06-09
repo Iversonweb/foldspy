@@ -1,16 +1,16 @@
-# Explanation.md — FoldSpy Plugin
+# Welcome to the Explainer Documentation for the FoldSpy Plugin
 
 ## The Problem (In My Own Words)
 
-As an admin of a marketing-focused WordPress website, I need to understand how users interact with key above-the-fold content — specifically which links are visible and clicked without scrolling. This allows me to evaluate what gets attention early and whether I need to rework content structure or call-to-actions.
+As an admin of a marketing-focused WordPress website, my client needs to understand how users interact with key above-the-fold content, specifically which links are visible and clicked without the page scrolling. This allows the client to evaluate what gets attention early, what links people click on more and whether content structure or call-to-actions need to be reworked.
 
-The challenge is capturing this kind of interaction, links seen before scrolling, without relying on server-side logic alone, while ensuring the experience remains performant, secure, and extendable.
+The challenge is capturing this kind of interaction, links seen before scrolling, without relying on server-side logic alone, while ensuring the experience remains seamless, secure, and can be extendable.
 
 ---
 
 ## My Solution Overview
 
-**FoldSpy** is a custom-built WordPress plugin that tracks above-the-fold hyperlinks visible to a user on the homepage. It sends that data to the backend and logs each visit, allowing the admin to review the behavior via a dedicated WordPress admin screen. The solution is:
+**FoldSpy** is a custom-built WordPress plugin that tracks above-the-fold hyperlinks visible to a user on the homepage. It sends that data to the backend and logs each visit, allowing the admin to review the behavior via a dedicated WordPress admin screen. It is also a very developer friendly plugin. The solution is:
 
 - Modular, lazy-loaded, and containerized using `league/container`
 - Fully testable with PHPUnit (unit tests)
@@ -108,18 +108,18 @@ This plugin captures exactly that:
   - Export all data to CSV
   - Monitor most frequent top links
 
-No extra setup is needed — once activated, FoldSpy starts tracking immediately. Admins have control, visibility, and insights.
+No extra setup is needed, once activated, FoldSpy starts tracking immediately. Admins have control, visibility, and insights.
 
 ---
 
 ## Thought Process & Design Philosophy
 
-I approached this challenge the way I would a client project: solve the problem first, then build it cleanly, extendably (just in-case the client gets too happy and wants to scale), and professionally.
+I approached this challenge the way I would a client project: solve the problem first, then build it cleanly, extendably (just in-case the client gets too happy and wants to scale).
 
 - **Clarity first**: I broke the work into **phases**, each isolated to do one thing well (DI, Tracker, REST, Admin, Tests).
-- **Native-first**: I avoided building from scratch when WordPress provided better tools (`register_rest_route`, `wp_schedule_event`, etc.).
+- **Native-first**: I avoided building from scratch when WordPress provided better tools (`register_rest_route`, `wp_schedule_event`, etc.), made development so much easier.
 - **Defensive development**: Every REST interaction is validated (nonce, caps, structure), with logs for failures.
-- **Sustainability**: View templates, service providers, and cache layers ensure the plugin can scale or be reused.
+- **Sustainability**: View templates, service providers, and cache layers make sure the plugin can scale or be reused.
 
 ---
 
